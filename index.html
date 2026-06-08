@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>Дмитро Будяк | Психолог. Карта психіки</title>
+    <meta name="description" content="Психологічна робота без медичного пафосу. Допомагаю побачити приховані сценарії, тригери та внутрішні конфлікти.">
+    
+    <!-- Шрифти: Unbounded та Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Unbounded:wght@600;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Іконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Unbounded', 'sans-serif'],
+                    },
+                    colors: {
+                        blackBase: '#050505',
+                        beigeBase: '#f2f0e9',
+                        burgundy: '#2B0A0A',
+                        darkGreen: '#0A1C10',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ЕФЕКТ НАКЛАДАННЯ СТОРІНОК (Sticky Stacking) */
+        .stack-wrapper { position: relative; }
+        .stack-section {
+            position: sticky; top: 0; min-height: 100svh; display: flex;
+            flex-direction: column; justify-content: center;
+            will-change: transform; box-shadow: 0 -20px 40px rgba(0,0,0,0.5); z-index: 1;
+        }
+
+        /* Запобіжник для ноутбуків (екрани висотою менше 850px) */
+        @media (max-height: 850px) {
+            .stack-section {
+                position: relative; min-height: auto;
+                padding-top: 5rem; padding-bottom: 5rem;
+                justify-content: flex-start; box-shadow: none;
+            }
+        }
+
+        /* Z-index для правильного перекриття */
+        #sec-hero { z-index: 1; }
+        #sec-pain { z-index: 2; }
+        #sec-results { z-index: 3; }
+        #sec-map { z-index: 4; }
+        #sec-about { z-index: 5; }
+        #sec-edu { z-index: 6; }
+        #sec-reviews { z-index: 7; }
+        #sec-faq { z-index: 8; }
+        #sec-pricing { z-index: 9; }
+        #sec-cta { z-index: 10; }
+
+        /* Кольорові класи */
+        .bg-dark { background-color: #050505; color: #ffffff; }
+        .bg-light { background-color: #f2f0e9; color: #050505; }
+        .bg-burgundy { background-color: #2B0A0A; color: #ffffff; }
+        .bg-dark-green { background-color: #0A1C10; color: #ffffff; }
+
+        /* Мітки над заголовками */
+        .section-label {
+            font-family: monospace; font-size: 0.85rem; letter-spacing: 0.1em;
+            text-transform: uppercase; font-weight: 600; margin-bottom: 1.5rem;
+            display: inline-block; border-bottom: 1px solid currentColor; padding-bottom: 0.5rem;
+        }
+
+        h1, h2, h3 { text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.1; }
+
+        /* FAQ Accordion */
+        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .faq-item.active .faq-content { margin-top: 1rem; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+
+        /* Модалка для відгуків */
+        #review-modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9999;
+            display: none; justify-content: center; align-items: center;
+            opacity: 0; transition: opacity 0.3s ease; backdrop-filter: blur(5px);
+        }
+        #review-modal.show { display: flex; opacity: 1; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; }
+    </style>
+</head>
+<body>
+
+    <!-- Навігація -->
+    <nav class="fixed top-0 w-full z-[100] mix-blend-difference py-6 pointer-events-none">
+        <div class="max-w-6xl mx-auto px-6 flex justify-between items-center pointer-events-auto">
+            <span class="font-display font-bold tracking-widest text-white text-lg sm:text-xl uppercase">DMYTROBUDIAK</span>
+            <a href="https://t.me/ALF_PSYCHOLOG" target="_blank" class="font-display text-[10px] sm:text-xs font-bold uppercase tracking-widest border border-white px-4 sm:px-6 py-2 sm:py-3 text-white hover:bg-white hover:text-black transition-colors">
+                Записатись
+            </a>
+        </div>
+    </nav>
+
+    <div class="stack-wrapper">
+
+        <!-- 1. HERO (ЧОРНИЙ) -->
+        <section id="sec-hero" class="stack-section bg-dark">
+            <div class="max-w-6xl mx-auto px-6 w-full flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                <div class="w-full md:w-1/2 mt-16 md:mt-0">
+                    <div class="section-label text-white/50 border-white/20">01 — психологія</div>
+                    <h1 class="font-display text-4xl sm:text-5xl lg:text-[4.5rem] font-black mb-6">
+                        СИЛА ВОЛІ<br>ТУТ НЕ<br>ПРАЦЮЄ.
+                    </h1>
+                    <p class="text-base sm:text-lg text-white/70 mb-8 max-w-md">
+                        Допомагаю побачити приховані сценарії, тригери та внутрішні конфлікти, які керують вашим життям. З наочним візуальним результатом.
+                    </p>
+                    <a href="https://t.me/ALF_PSYCHOLOG" target="_blank" class="inline-block bg-white text-black font-display font-bold uppercase tracking-wider px-8 py-4 sm:py-5 hover:bg-gray-200 transition-colors">
+                        Написати в Telegram
+                    </a>
+                </div>
+                <div class="w-full md:w-1/2 flex justify-end">
+                    <div class="w-full max-w-sm aspect-[4/5] overflow-hidden grayscale">
+                        <img src="IMG_9705.PNG" alt="Дмитро Будяк" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. БОЛІ (ТЕМНО-БОРДОВИЙ) -->
+        <section id="sec-pain" class="stack-section bg-burgundy">
+            <div class="max-w-6xl mx-auto px-6 w-full">
+                <div class="section-label text-white/50 border-white/20">02 — проблематика</div>
+                <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-black mb-10 border-b-2 border-white/20 pb-6">
+                    МОЖЛИВО, ВИ<br>ВПІЗНАЄТЕ СЕБЕ
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 lg:gap-y-16">
+                    <div>
+                        <h3 class="font-display font-bold text-lg sm:text-xl mb-3">ПОСТІЙНА ТРИВОГА</h3>
+                        <p class="text-white/70 text-sm sm:text-base">Наче об'єктивно все нормально, але всередині фонова напруга не зникає. Відчуття, що от-от станеться щось погане.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-bold text-lg sm:text-xl mb-3">СКЛАДНІ СТОСУНКИ</h3>
+                        <p class="text-white/70 text-sm sm:text-base">Ті самі конфлікти, розчарування та вибір "не тих" партнерів знову і знову. Неможливість вийти з руйнівного сценарію.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-bold text-lg sm:text-xl mb-3">ВИГОРАННЯ ТА АПАТІЯ</h3>
+                        <p class="text-white/70 text-sm sm:text-base">Немає сил навіть на те, що раніше приносило задоволення. Життя відчувається як постійне "треба" без "хочу".</p>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-bold text-lg sm:text-xl mb-3">ВІДСУТНІСТЬ КОРДОНІВ</h3>
+                        <p class="text-white/70 text-sm sm:text-base">Невміння сказати "ні". Постійне підлаштування під інших на шкоду власним інтересам через страх відкидання.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. РЕЗУЛЬТАТИ (ТЕМНО-ЗЕЛЕНИЙ) -->
+        <section id="sec-results" class="stack-section bg-dark-green">
+            <div class="max-w-6xl mx-auto px-6 w-full">
+                <div class="section-label text-white/50 border-white/20">03 — результат</div>
+                <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-black mb-10 border-b-2 border-white pb-6">
+                    ЩО ЗМІНЮЄТЬСЯ
+                </h2>
+                <div class="space-y-6 sm:space-y-8 text-lg sm:text-xl lg:text-2xl font-medium">
+                    <div class="flex gap-4 sm:gap-6 border-b border-white/10 pb-6">
+                        <span class="text-white/30 font-display">01/</span>
+                        <p>Ви чітко бачите, <span class="text-[#f2f0e9] font-bold">що і чому вас тригерить</span>, замість того, щоб тонути в емоціях.</p>
+                    </div>
+                    <div class="flex gap-4 sm:gap-6 border-b border-white/10 pb-6">
+                        <span class="text-white/30 font-display">02/</span>
+                        <p>Ви <span class="text-[#f2f0e9] font-bold">перестаєте наступати на ті самі граблі</span> у стосунках чи роботі.</p>
+                    </div>
+                    <div class="flex gap-4 sm:gap-6 border-b border-white/10 pb-6">
+                        <span class="text-white/30 font-display">03/</span>
+                        <p>Повертаєте здатність <span class="text-[#f2f0e9] font-bold">спиратися на себе</span>, а не шукати підтвердження зовні.</p>
+                    </div>
+                    <div class="flex gap-4 sm:gap-6 pb-2">
+                        <span class="text-white/30 font-display">04/</span>
+                        <p>Маєте на руках <span class="text-[#f2f0e9] font-bold">конкретні кроки</span>, що робити, коли знову "накриває".</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. КАРТА ПСИХІКИ (БЕЖЕВИЙ) -->
+        <section id="sec-map" class="stack-section bg-light">
+            <div class="max-w-6xl mx-auto px-6 w-full">
+                <div class="flex flex-col lg:flex-row gap-8 lg:gap-16">
+                    <div class="lg:w-1/3">
+                        <div class="section-label border-black/20">04 — метод</div>
+                        <h2 class="font-display text-4xl sm:text-5xl font-black mb-4">
+                            КАРТА<br>ПСИХІКИ
+                        </h2>
+                        <p class="text-black/70 text-sm sm:text-base">
+                            Більшість терапій — це просто усні бесіди. Я пропоную інший підхід. Після глибокої сесії ви отримуєте структурований письмовий документ. Вашу особисту інструкцію до себе.
+                        </p>
+                    </div>
+                    
+                    <div class="lg:w-2/3">
+                        <div class="border-t-2 border-black">
+                            <div class="flex items-center gap-4 sm:gap-6 py-3 border-b border-black/10 hover:bg-black/5 transition-colors px-2">
+                                <span class="font-display text-black/40 font-bold">01</span>
+                                <span class="font-display font-bold text-xs sm:text-sm">ВАШ БАЗОВИЙ СЦЕНАРІЙ</span>
+                            </div>
+                            <div class="flex items-center gap-4 sm:gap-6 py-3 border-b border-black/10 hover:bg-black/5 transition-colors px-2">
+                                <span class="font-display text-black/40 font-bold">02</span>
+                                <span class="font-display font-bold text-xs sm:text-sm">ЦЕНТРАЛЬНА СХЕМА ВАШОЇ СИСТЕМИ</span>
+                            </div>
+                            <div class="flex items-center gap-4 sm:gap-6 py-3 border-b border-black/10 hover:bg-black/5 transition-colors px-2">
+                                <span class="font-display text-black/40 font-bold">03</span>
+                                <span class="font-display font-bold text-xs sm:text-sm">ВАШІ РЕСУРСИ</span>
+                            </div>
+                            <div class="flex items-center gap-4 sm:gap-6 py-3 border-b border-black/10 hover:bg-black/5 transition-colors px-2">
+                                <span class="font-display text-black/40 font-bold">04</span>
+                                <span class="font-display font-bold text-xs sm:text-sm">ВАШ СПОСІБ ОТРИМУВАТИ ЛЮБОВ</span>
+                            </div>
+                            <div class="flex items-center gap-4 sm:gap-6 py-3 border-b border-black/10 hover:bg-black/5 transition-colors px-2">
+                                <span class="font-display text-black/40 font-bold">05</span>
+                                <span class="font-display font-bold text-xs sm:text-sm">СЛІПІ ЗОНИ</span>
+                            </div>
+                            <div class="flex items-center gap-4 sm:gap-6 py-3 border-b border-black/10 hover:bg-black/5 transition-colors px-2">
+                                <span class="font-display text-black/40 font-bold">06</span>
+                                <span class="font-display font-bold text-xs sm:text-sm">ЕМОЦІЙНІ ТРИГЕРИ ТА РЕАКЦІЇ</span>
+                            </div>
+                            <div class="flex items-center gap-4 sm:gap-6 py-3 border-b border-black/10 hover:bg-black/5 transition-colors px-2">
+                                <span class="font-display text-black/40 font-bold">07</span>
+                                <span class="font-display font-bold text-xs sm:text-sm">ЩО ВАС ВИСНАЖУЄ</span>
+                            </div>
+                            <div class="flex items-center gap-4 sm:gap-6 py-3 border-b border-black/10 hover:bg-black/5 transition-colors px-2">
+                                <span class="font-display text-black/40 font-bold">08</span>
+                                <span class="font-display font-bold text-xs sm:text-sm">ВАШ ПОТЕНЦІАЛ ТА ТОЧКИ РОСТУ</span>
+                            </div>
+                            <div class="flex items-center gap-4 sm:gap-6 py-3 border-b border-black/10 hover:bg-black/5 transition-colors px-2">
+                                <span class="font-display text-black/40 font-bold">09</span>
+                                <span class="font-display font-bold text-xs sm:text-sm">ПРОГНОЗ</span>
+                            </div>
+                            <div class="flex items-center gap-4 sm:gap-6 py-3 border-b-2 border-black hover:bg-black/5 transition-colors px-2">
+                                <span class="font-display text-black/40 font-bold">10</span>
+                                <span class="font-display font-bold text-xs sm:text-sm">ПЕРШІ КРОКИ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. ПРО АВТОРА (ЧОРНИЙ) -->
+        <section id="sec-about" class="stack-section bg-dark">
+            <div class="max-w-6xl mx-auto px-6 w-full flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+                <div class="w-full md:w-1/2 order-2 md:order-1">
+                    <div class="w-full aspect-[4/5] overflow-hidden grayscale">
+                        <img src="IMG_9698.PNG" alt="Дмитро Будяк" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 order-1 md:order-2">
+                    <div class="section-label text-white/50 border-white/20">05 — підхід</div>
+                    <h2 class="font-display text-4xl sm:text-5xl font-black mb-6">СТРУКТУРА, А НЕ ЖАЛІСТЬ</h2>
+                    <div class="space-y-4 text-white/70 text-sm sm:text-base">
+                        <p>Я прийшов у психологію не з книжок, а з власного досвіду супроводу військових і ветеранів у кризових станах.</p>
+                        <p>Там я чітко зрозумів: людині у напрузі потрібна не абстрактна порада. Їй потрібна можливість побачити себе збоку чесно, без оцінок і осуду.</p>
+                        <p>Я не оцінюю ваші рішення. Не кажу «треба було». Те, що ви відчуваєте — це не «проблема характеру», це реакція на досвід.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. ОСВІТА (ТЕМНО-БОРДОВИЙ) -->
+        <section id="sec-edu" class="stack-section bg-burgundy">
+            <div class="max-w-6xl mx-auto px-6 w-full">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-8">
+                    <div>
+                        <div class="section-label border-white/20">06 — кваліфікація</div>
+                        <h2 class="font-display text-4xl sm:text-5xl font-black">ДИПЛОМИ</h2>
+                    </div>
+                    <div class="mt-4 md:mt-0 font-display text-xl sm:text-2xl font-bold">11 ДОКУМЕНТІВ</div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                    <a href="photo_1_2026-06-05_22-15-32.jpg" target="_blank" rel="noopener noreferrer" class="relative aspect-[4/3] bg-black/40 border border-white/5 overflow-hidden group transition-all duration-300 w-full block">
+                        <img src="photo_1_2026-06-05_22-15-32.jpg" alt="Диплом" class="w-full h-full object-contain p-3 grayscale group-hover:grayscale-0 transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <a href="photo_2_2026-06-05_22-15-32.jpg" target="_blank" rel="noopener noreferrer" class="relative aspect-[4/3] bg-black/40 border border-white/5 overflow-hidden group transition-all duration-300 w-full block">
+                        <img src="photo_2_2026-06-05_22-15-32.jpg" alt="Диплом" class="w-full h-full object-contain p-3 grayscale group-hover:grayscale-0 transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <a href="photo_3_2026-06-05_22-15-32.jpg" target="_blank" rel="noopener noreferrer" class="relative aspect-[4/3] bg-black/40 border border-white/5 overflow-hidden group transition-all duration-300 w-full block">
+                        <img src="photo_3_2026-06-05_22-15-32.jpg" alt="Диплом" class="w-full h-full object-contain p-3 grayscale group-hover:grayscale-0 transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <a href="photo_4_2026-06-05_22-15-32.jpg" target="_blank" rel="noopener noreferrer" class="relative aspect-[4/3] bg-black/40 border border-white/5 overflow-hidden group transition-all duration-300 w-full block">
+                        <img src="photo_4_2026-06-05_22-15-32.jpg" alt="Диплом" class="w-full h-full object-contain p-3 grayscale group-hover:grayscale-0 transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <a href="photo_5_2026-06-05_22-15-32.jpg" target="_blank" rel="noopener noreferrer" class="relative aspect-[4/3] bg-black/40 border border-white/5 overflow-hidden group transition-all duration-300 w-full block">
+                        <img src="photo_5_2026-06-05_22-15-32.jpg" alt="Диплом" class="w-full h-full object-contain p-3 grayscale group-hover:grayscale-0 transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <a href="photo_6_2026-06-05_22-15-32.jpg" target="_blank" rel="noopener noreferrer" class="relative aspect-[4/3] bg-black/40 border border-white/5 overflow-hidden group transition-all duration-300 w-full block">
+                        <img src="photo_6_2026-06-05_22-15-32.jpg" alt="Диплом" class="w-full h-full object-contain p-3 grayscale group-hover:grayscale-0 transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <a href="photo_7_2026-06-05_22-15-32.jpg" target="_blank" rel="noopener noreferrer" class="relative aspect-[4/3] bg-black/40 border border-white/5 overflow-hidden group transition-all duration-300 w-full block">
+                        <img src="photo_7_2026-06-05_22-15-32.jpg" alt="Диплом" class="w-full h-full object-contain p-3 grayscale group-hover:grayscale-0 transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <a href="photo_8_2026-06-05_22-15-32.jpg" target="_blank" rel="noopener noreferrer" class="relative aspect-[4/3] bg-black/40 border border-white/5 overflow-hidden group transition-all duration-300 w-full block">
+                        <img src="photo_8_2026-06-05_22-15-32.jpg" alt="Диплом" class="w-full h-full object-contain p-3 grayscale group-hover:grayscale-0 transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <a href="photo_9_2026-06-05_22-15-32.jpg" target="_blank" rel="noopener noreferrer" class="relative aspect-[4/3] bg-black/40 border border-white/5 overflow-hidden group transition-all duration-300 w-full block">
+                        <img src="photo_9_2026-06-05_22-15-32.jpg" alt="Диплом" class="w-full h-full object-contain p-3 grayscale group-hover:grayscale-0 transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <a href="photo_10_2026-06-05_22-15-32.jpg" target="_blank" rel="noopener noreferrer" class="relative aspect-[4/3] bg-black/40 border border-white/5 overflow-hidden group transition-all duration-300 w-full block">
+                        <img src="photo_10_2026-06-05_22-15-32.jpg" alt="Диплом" class="w-full h-full object-contain p-3 grayscale group-hover:grayscale-0 transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                    <a href="photo_11_2026-06-05_22-15-32.jpg" target="_blank" rel="noopener noreferrer" class="relative aspect-[4/3] bg-black/40 border border-white/5 overflow-hidden group transition-all duration-300 w-full block">
+                        <img src="photo_11_2026-06-05_22-15-32.jpg" alt="Диплом" class="w-full h-full object-contain p-3 grayscale group-hover:grayscale-0 transition-transform duration-500 group-hover:scale-110">
+                    </a>
+                </div>
+                <p class="mt-4 text-white/50 text-xs italic">* Натисніть на документ, щоб відкрити його на весь екран</p>
+            </div>
+        </section>
+
+        <!-- 7. ВІДГУКИ (ТЕМНО-ЗЕЛЕНИЙ) - ЖИВІ ЛЮДСЬКІ ТЕКСТИ -->
+        <section id="sec-reviews" class="stack-section bg-dark-green">
+            <div class="max-w-6xl mx-auto px-6 w-full">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-10 border-b-2 border-white/20 pb-6">
+                    <div>
+                        <div class="section-label text-white/50 border-white/20">07 — кейси</div>
+                        <h2 class="font-display text-4xl sm:text-5xl font-black">АНОНІМНІ ВІДГУКИ</h2>
+                    </div>
+                    <button onclick="openReviewModal()" class="mt-4 md:mt-0 font-display text-xs sm:text-sm font-bold border border-white px-6 py-3 hover:bg-white hover:text-black transition-colors uppercase">
+                        Залишити відгук
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="border border-white/20 p-6 flex flex-col justify-between h-full bg-black/10">
+                        <p class="text-white/80 italic text-sm sm:text-base mb-6 leading-relaxed">
+                            "Діма, привіт! Перечитую нашу карту вже третій раз. Нарешті зрозуміла, чому мене так криє, коли хлопець просто мовчить. Вчора замість істерики відкрила схему, подивилась на свої тригери і реально попустило. Це якийсь меджик, дякую величезне!"
+                        </p>
+                        <div class="font-display text-xs uppercase tracking-widest text-white/50 border-t border-white/10 pt-4">— Жінка, 28 років</div>
+                    </div>
+                    <div class="border border-white/20 p-6 flex flex-col justify-between h-full bg-black/10">
+                        <p class="text-white/80 italic text-sm sm:text-base mb-6 leading-relaxed">
+                            "Йшов на сесію дуже скептично налаштований. Думав, знову будуть колупати дитинство і питати, що я відчуваю. Але розбір вийшов максимально по ділу, як для мужика. Побачив свою «сліпу зону» в роботі, тепер ясно, куди зливаються всі сили і чому я постійно вигорівший."
+                        </p>
+                        <div class="font-display text-xs uppercase tracking-widest text-white/50 border-t border-white/10 pt-4">— Чоловік, 34 роки</div>
+                    </div>
+                    <div class="border border-white/20 p-6 flex flex-col justify-between h-full bg-black/10">
+                        <p class="text-white/80 italic text-sm sm:text-base mb-6 leading-relaxed">
+                            "Дуже боялась йти. Думала, що зі мною щось не так і мене будуть засуджувати за мої вчинки. А вийшло так тепло і без оцінок. Карта психіки — це топ. Наче інструкція до самої себе. Тепер я бачу свій базовий сценарій і розумію, як з нього виходити."
+                        </p>
+                        <div class="font-display text-xs uppercase tracking-widest text-white/50 border-t border-white/10 pt-4">— Жінка, 31 рік</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. FAQ (БЕЖЕВИЙ) -->
+        <section id="sec-faq" class="stack-section bg-light">
+            <div class="max-w-4xl mx-auto px-6 w-full">
+                <div class="section-label border-black/20">08 — faq</div>
+                <h2 class="font-display text-4xl sm:text-5xl font-black mb-10">ЧАСТІ ЗАПИТАННЯ</h2>
+                <div class="border-t-2 border-black">
+                    <div class="faq-item border-b border-black/20">
+                        <button class="w-full py-4 flex justify-between items-center text-left" onclick="toggleFaq(this)">
+                            <span class="font-display font-bold text-sm sm:text-base pr-4">ЧИМ КАРТА ПСИХІКИ ВІДРІЗНЯЄТЬСЯ ВІД КОНСУЛЬТАЦІЇ?</span>
+                            <i class="fa-solid fa-plus faq-icon transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content"><p class="text-black/70 text-sm pb-4">Звичайна консультація — це усний формат. Карта психіки — це глибока сесія, після якої ви отримуєте візуальну схему своєї психіки.</p></div>
+                    </div>
+                    <div class="faq-item border-b border-black/20">
+                        <button class="w-full py-4 flex justify-between items-center text-left" onclick="toggleFaq(this)">
+                            <span class="font-display font-bold text-sm sm:text-base pr-4">СУМНІВАЮСЬ, ЧИ ПІДІЙДЕ МЕНІ ФОРМАТ. ЩО РОБИТИ?</span>
+                            <i class="fa-solid fa-plus faq-icon transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content"><p class="text-black/70 text-sm pb-4">Напишіть мені в Telegram коротко вашу ситуацію. Я відверто скажу, чи зможу допомогти.</p></div>
+                    </div>
+                    <div class="faq-item border-b border-black/20">
+                        <button class="w-full py-4 flex justify-between items-center text-left" onclick="toggleFaq(this)">
+                            <span class="font-display font-bold text-sm sm:text-base pr-4">ЯК ПРОХОДЯТЬ СЕСІЇ І СКІЛЬКИ ТРИВАЮТЬ?</span>
+                            <i class="fa-solid fa-plus faq-icon transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content"><p class="text-black/70 text-sm pb-4">Стандартна сесія триває 60 хвилин. Формат: онлайн-відеозв'язок.</p></div>
+                    </div>
+                    <div class="faq-item border-b border-black/20">
+                        <button class="w-full py-4 flex justify-between items-center text-left" onclick="toggleFaq(this)">
+                            <span class="font-display font-bold text-sm sm:text-base pr-4">ЧИ ПРАЦЮЄТЕ ВИ З ПІДЛІТКАМИ АБО ПАРАМИ?</span>
+                            <i class="fa-solid fa-plus faq-icon transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content"><p class="text-black/70 text-sm pb-4">Працюю виключно індивідуально і лише з повнолітніми (18+).</p></div>
+                    </div>
+                    <div class="faq-item border-b border-black/20">
+                        <button class="w-full py-4 flex justify-between items-center text-left" onclick="toggleFaq(this)">
+                            <span class="font-display font-bold text-sm sm:text-base pr-4">ЩО РОБИТИ, ЯКЩО Я НЕ МОЖУ СФОРМУЛЮВАТИ ЗАПИТ?</span>
+                            <i class="fa-solid fa-plus faq-icon transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content"><p class="text-black/70 text-sm pb-4">Це нормально. Достатньо прийти з відчуттям "мені погано". Я допоможу розплутати цей клубок.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. ЦІНИ (ЧОРНИЙ) -->
+        <section id="sec-pricing" class="stack-section bg-dark">
+            <div class="max-w-6xl mx-auto px-6 w-full">
+                <div class="section-label text-white/50 border-white/20">09 — вартість</div>
+                <h2 class="font-display text-3xl sm:text-5xl font-black mb-8">ФОРМАТИ РОБОТИ</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
+                    <div class="border border-white/20 p-5 sm:p-6 flex flex-col hover:bg-white/5 transition-colors">
+                        <h3 class="font-display text-lg sm:text-xl font-bold mb-2">КОНСУЛЬТАЦІЯ</h3>
+                        <p class="text-white/60 text-xs sm:text-sm mb-4 h-10">Усний розбір ситуації. Без письмового звіту. (60 хв)</p>
+                        <div class="font-display text-3xl font-bold mb-6 whitespace-nowrap">1&nbsp;200&nbsp;₴</div>
+                        <ul class="space-y-2 mb-6 flex-1 text-xs sm:text-sm text-white/80">
+                            <li class="border-b border-white/10 pb-1">Аналіз поточного стану</li><li class="border-b border-white/10 pb-1">Усні рекомендації</li>
+                        </ul>
+                        <a href="https://t.me/ALF_PSYCHOLOG" target="_blank" class="w-full text-center border border-white py-3 font-display font-bold text-xs uppercase hover:bg-white hover:text-black transition-colors">Обрати формат</a>
+                    </div>
+                    <div class="bg-white text-black p-5 sm:p-6 flex flex-col transform lg:-translate-y-2 shadow-2xl relative">
+                        <div class="absolute top-0 right-0 bg-black text-white font-display text-[10px] px-3 py-1 uppercase font-bold">Хіт</div>
+                        <h3 class="font-display text-lg sm:text-xl font-bold mb-2">КАРТА ПСИХІКИ</h3>
+                        <p class="text-black/60 text-xs sm:text-sm mb-4 h-10">Глибока сесія + візуальна схема (mind-map)</p>
+                        <div class="font-display text-3xl font-bold mb-6 whitespace-nowrap">1&nbsp;800&nbsp;₴</div>
+                        <ul class="space-y-2 mb-6 flex-1 text-xs sm:text-sm text-black/80 font-medium">
+                            <li class="border-b border-black/10 pb-1">Усе з базової консультації</li><li class="border-b border-black/10 pb-1">Схема тригерів та реакцій</li>
+                            <li class="border-b border-black/10 pb-1">Аналіз 10 пунктів карти</li><li class="border-b border-black/10 pb-1">План перших дій</li>
+                        </ul>
+                        <a href="https://t.me/ALF_PSYCHOLOG" target="_blank" class="w-full text-center bg-black text-white py-3 font-display font-bold text-xs uppercase hover:bg-black/80 transition-colors">Обрати формат</a>
+                    </div>
+                    <div class="border border-white/20 p-5 sm:p-6 flex flex-col hover:bg-white/5 transition-colors">
+                        <h3 class="font-display text-lg sm:text-xl font-bold mb-2">КАРТА PRO</h3>
+                        <p class="text-white/60 text-xs sm:text-sm mb-4 h-10">Максимальний розбір. Додатковий текстовий супровід.</p>
+                        <div class="font-display text-3xl font-bold mb-6 whitespace-nowrap">2&nbsp;500&nbsp;₴</div>
+                        <ul class="space-y-2 mb-6 flex-1 text-xs sm:text-sm text-white/80">
+                            <li class="border-b border-white/10 pb-1">Коріння реакцій</li><li class="border-b border-white/10 pb-1">Детальний аналіз особистості</li><li class="border-b border-white/10 pb-1">Велика інструкція до себе</li>
+                        </ul>
+                        <a href="https://t.me/ALF_PSYCHOLOG" target="_blank" class="w-full text-center border border-white py-3 font-display font-bold text-xs uppercase hover:bg-white hover:text-black transition-colors">Обрати формат</a>
+                    </div>
+                </div>
+                <div class="mt-4 border border-white/20 p-5 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div>
+                        <h3 class="font-display text-lg font-bold text-red-500 mb-1 uppercase">Екстрена консультація</h3>
+                        <p class="text-white/60 text-xs sm:text-sm max-w-2xl">Зв'язок можливий навіть о 2-й ночі.</p>
+                    </div>
+                    <div class="flex items-center gap-4 w-full md:w-auto justify-between sm:justify-end">
+                        <div class="font-display text-2xl font-bold whitespace-nowrap">12&nbsp;000&nbsp;₴</div>
+                        <a href="https://t.me/ALF_PSYCHOLOG" target="_blank" class="text-center bg-red-600 text-white px-6 py-3 font-display font-bold text-xs uppercase hover:bg-red-700 transition-colors whitespace-nowrap">Обрати</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. CTA & ФУТЕР (ТЕМНО-БОРДОВИЙ) -->
+        <section id="sec-cta" class="stack-section bg-burgundy pt-24 pb-0 flex flex-col justify-between overflow-hidden">
+            <div class="max-w-4xl mx-auto px-6 w-full text-center mt-auto mb-10">
+                <h2 class="font-display text-4xl md:text-6xl font-black mb-6 uppercase">ДОСИТЬ НЕСТИ ЦЕ<br>САМОСТІЙНО.</h2>
+                <p class="text-lg text-white/70 mb-10 max-w-2xl mx-auto">Готові розібратися в причинах і побачити структуру? Напишіть мені.</p>
+                <div class="flex justify-center">
+                    <a href="https://t.me/ALF_PSYCHOLOG" target="_blank" class="bg-white text-black px-10 py-5 font-display font-bold text-sm sm:text-lg uppercase hover:bg-gray-200 transition-colors flex items-center gap-4 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+                        Написати в Telegram <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <footer class="w-full bg-[#1A0505] py-6 px-6 mt-16">
+                <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-bold uppercase text-white/60">
+                    <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
+                        <p>© 2026 DMYTROBUDIAK.</p>
+                        <a href="privacy.html" class="hover:text-white transition-colors underline underline-offset-4">Політика конфіденційності</a>
+                    </div>
+                    <div class="flex gap-6 text-base text-white mt-4 sm:mt-0">
+                        <a href="https://instagram.com/dmytro_budiak" target="_blank" class="hover:text-gray-400 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@dmitro_budiak" target="_blank" class="hover:text-gray-400 transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="https://www.facebook.com/share/1EPdAvq2MX/?mibextid=wwXIfr" target="_blank" class="hover:text-gray-400 transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                </div>
+            </footer>
+        </section>
+
+    </div>
+
+    <!-- Модалка для відгуків -->
+    <div id="review-modal">
+        <div class="bg-light p-8 max-w-md w-full relative rounded-lg">
+            <button onclick="closeReviewModal()" class="absolute top-4 right-4 text-2xl text-black hover:text-black/50 transition-colors"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="font-display text-xl sm:text-2xl font-black mb-2 uppercase text-black">ЗАЛИШИТИ ВІДГУК</h3>
+            <p class="text-xs sm:text-sm text-black/70 mb-6">Ваш відгук буде опубліковано анонімно після перевірки.</p>
+            
+            <form onsubmit="submitReview(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase mb-1 text-black">Що змінилося після сесії?</label>
+                    <textarea required rows="4" class="w-full bg-transparent border-2 border-black p-3 focus:outline-none focus:bg-white text-black" placeholder="Напишіть ваші враження..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-black text-white py-4 font-display font-bold uppercase hover:bg-black/80 transition-colors">
+                    Надіслати анонімно
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // FAQ
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            const content = item.querySelector('.faq-content');
+            const isActive = item.classList.contains('active');
+            
+            document.querySelectorAll('.faq-item').forEach(faq => {
+                faq.classList.remove('active');
+                faq.querySelector('.faq-content').style.maxHeight = null;
+            });
+            if (!isActive) {
+                item.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+
+        // Модалка відгуків
+        const reviewModal = document.getElementById('review-modal');
+        function openReviewModal() {
+            reviewModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeReviewModal() {
+            reviewModal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+        reviewModal.addEventListener('click', (e) => {
+            if (e.target === reviewModal) closeReviewModal();
+        });
+        function submitReview(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = 'ВІДПРАВЛЯЄТЬСЯ...';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.innerText = 'ВІДПРАВЛЕНО ДЯКУЮ!';
+                btn.classList.replace('bg-black', 'bg-green-600');
+                setTimeout(() => {
+                    closeReviewModal(); e.target.reset();
+                    btn.innerText = originalText;
+                    btn.classList.replace('bg-green-600', 'bg-black');
+                    btn.disabled = false;
+                }, 2000);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
