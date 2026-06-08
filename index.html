@@ -50,6 +50,9 @@
             position: sticky; top: 0; min-height: 100svh; display: flex;
             flex-direction: column; justify-content: center;
             will-change: transform; box-shadow: 0 -20px 40px rgba(0,0,0,0.5); z-index: 1;
+            backface-visibility: hidden; transform: translateZ(0);
+            /* Прибираємо мікро-зазори */
+            margin-bottom: -1px; 
         }
 
         /* Запобіжник для ноутбуків (екрани висотою менше 850px) */
@@ -58,20 +61,21 @@
                 position: relative; min-height: auto;
                 padding-top: 5rem; padding-bottom: 5rem;
                 justify-content: flex-start; box-shadow: none;
+                margin-bottom: 0;
             }
         }
 
         /* Z-index для правильного перекриття */
-        #sec-hero { z-index: 1; }
-        #sec-pain { z-index: 2; }
-        #sec-results { z-index: 3; }
-        #sec-map { z-index: 4; }
-        #sec-about { z-index: 5; }
-        #sec-edu { z-index: 6; }
-        #sec-reviews { z-index: 7; }
-        #sec-faq { z-index: 8; }
-        #sec-pricing { z-index: 9; }
-        #sec-cta { z-index: 10; }
+        #sec-hero { z-index: 10; }
+        #sec-pain { z-index: 9; }
+        #sec-results { z-index: 8; }
+        #sec-map { z-index: 7; }
+        #sec-about { z-index: 6; }
+        #sec-edu { z-index: 5; }
+        #sec-reviews { z-index: 4; }
+        #sec-faq { z-index: 3; }
+        #sec-pricing { z-index: 2; }
+        #sec-cta { z-index: 1; }
 
         /* Кольорові класи */
         .bg-dark { background-color: #050505; color: #ffffff; }
@@ -137,7 +141,8 @@
                 </div>
                 <div class="w-full md:w-1/2 flex justify-end">
                     <div class="w-full max-w-sm aspect-[4/5] overflow-hidden grayscale">
-                        <img src="IMG_9705.PNG" alt="Дмитро Будяк" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700">
+                        <!-- Змінено фото на IMG_9706.jpg -->
+                        <img src="IMG_9706.jpg" alt="Дмитро Будяк" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700">
                     </div>
                 </div>
             </div>
@@ -266,7 +271,8 @@
             <div class="max-w-6xl mx-auto px-6 w-full flex flex-col md:flex-row gap-8 md:gap-12 items-center">
                 <div class="w-full md:w-1/2 order-2 md:order-1">
                     <div class="w-full aspect-[4/5] overflow-hidden grayscale">
-                        <img src="IMG_9698.PNG" alt="Дмитро Будяк" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                        <!-- Змінено фото на IMG_9707.PNG -->
+                        <img src="IMG_9707.PNG" alt="Дмитро Будяк" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 order-1 md:order-2">
